@@ -63,6 +63,6 @@ QoS Level	        Mô tả
 
 - Ứng dụng
 + Hệ thống IoT thông minh: Cảm biến đo nhiệt độ, độ ẩm, ánh sáng...
-+ Tự động hóa nhà máy: Theo dõi và điều khiển thiết bị từ xa.
-+ Smart Home: Điều khiển đèn, cửa, điều hòa qua MQTT.
-+ Giao tiếp giữa robot & máy chủ trong các hệ thống AI/ML.
++ Tự động hóa nhà máy: Theo dõi và điều khiển thiết bị từ xa
++ Smart Home: Điều khiển đèn, cửa, điều hòa qua MQTT
++ Giao tiếp giữa robot & máy chủ trong các hệ thống AI/ML
