@@ -1,0 +1,68 @@
+RESTful API
+- là 1 kiểu kiến trúc API dựa trên giao thức HTTP dùng để trao đổi dữ liệu giữa client và server, REST được thiết kế đơn giản, linh hoạt, dễ mở rộng
+
+- Đặc điểm chính:
++ Client-Server (Máy khách - Máy chủ): Tách biệt giữa client (giao diện người dùng) và server (xử lý logic, dữ liệu).
++ Stateless (Không trạng thái): Mỗi yêu cầu từ client đến server phải chứa đầy đủ thông tin cần thiết để xử lý, server không lưu trạng thái của client.
++ Cacheable (Có thể lưu vào bộ nhớ đệm): Phản hồi từ server nên có thông tin về khả năng cache để cải thiện hiệu suất.
++ Uniform Interface (Giao diện đồng nhất): API phải tuân theo các chuẩn giao tiếp thống nhất (sử dụng các phương thức HTTP, định dạng dữ liệu JSON/XML).
++ Layered System (Hệ thống phân lớp): API có thể được thiết kế thành nhiều lớp để quản lý bảo mật, cân bằng tải,...
+
+- Các phương thức HTTP phổ biến trong HTTP RESTful API:
+Phương thức	Mô tả				            Ví dụ
+GET		    Lấy dữ liệu từ server		    GET /users (Lấy danh sách người dùng)
+POST		Tạo dữ liệu mới trên server	    POST /users (Tạo người dùng mới)
+PUT		    Cập nhật toàn bộ tài nguyên	    PUT /users/1 (Cập nhật toàn bộ thông tin user 1)
+PATCH		Cập nhật một phần tài nguyên    PATCH /users/1 (Chỉ cập nhật một trường dữ liệu)
+DELETE		Xóa tài nguyên			        DELETE /users/1 (Xóa user 1)
+
+- Những chú ý khi thiết kế RESTful API
++ Trả về mã trạng thái phù hợp (200 OK, 201 Created, 404 Not Found, 400 Bad Request, 500 Internal Sever Error)
++ Sử dụng RESTful URL hợp lý (ví dụ: /users/1 thay vì /getUser?id=1)
++ Áp dụng xác thực và bảo mật (JWT, OAuth, API Key)
+
+- Mở rộng:
++ Sử dụng Flask-RESTful để tối ưu tổ chức mã nguồn
++ Tích hợp Swagger để tự động sinh tài liệu API
++ Bảo mật API bằng JWT Authentication
++ Triển khai API lên dịch vụ cloud như AWS, Heroku, hoặc Google Cloud
+--------------------------------------------------------------------------------------------------------------------
+Socket
+- là 1 giao thức giao tiếp giữa các tiến trình (Inter-Process Communication - IPC), thường được dùng để truyền dữ liệu
+giữa các ứng dụng trên cùng 1 máy tính hoặc các máy tính trong mạng
+
+- Phân loại: có 3 loại phổ biến
++ Stream Socket (SOCK_STREAM - TCP): cung cấp kênh truyền dữ liệu tin cậy, có kiểm soát lỗi và đã bảo dữ liệu đến đúng thứ tự
++ Datagram Socket (SOCK_DGRAM - UDP): gửi dữ liệu dưới dạng gói tin (datagram), không đảm bảo độ tin cậy hoặc thứ tự của dữ liệu
++ Raw Socket (SOCK_RAW): cho phép truy cập trực tiếp vào các giao thức mạng, thường dùng để phân tích gói tin hoặc tạo các gói tin tùy chỉnh
+---------------------------------------------------------------------------------------------------------------------
+MQTT
+- là 1 giao thức nhắn tin nhẹ dựa trên mô hình publish/subscribe, thường được sử dụng trong IoT để truyền tải dữ liệu
+giữa các thiết bị có tài nguyên hạn chế với độ trễ thấp
+
+- Cấu trúc: gồm 3 thành phần chính
++ Broker (máy chủ trung gian): 
+    là trung tâm điều phối tất cả các tin nhắn giữa các thiết bị
+    phổ biến nhất là Eclipse Mosquitto, EMQX, HiveMQ
++ Publisher (thiết bị gửi dữ liệu)
+    gửi thông điệp đến 1 topic nào đó trên Broker
++ Subscriber (thiết bị nhận dữ liệu)
+    đăng ký nhận dữ liệu từ 1 topic cụ thể
+
+
+- Cách hoạt động
++ thiết bị Publisher gửi dữ liệu lên 1 topic cụ thể
++ Broker nhận dữ liệu từ Publisher và gửi đến tất cả các Subscriber đang đăng ký topic đó
++ Subscriber nhận dữ liệu ngay lập tức khi có thông điệp mới
+
+- Chất lượng dịch vụ QoS trong MQTT: hỗ trợ 3 cấp độ đảm bảo tin nhắn
+QoS Level	        Mô tả
+0 - At most once	Gửi một lần, không cần xác nhận (có thể mất dữ liệu)
+1 - At least once	Gửi nhiều lần đến khi có xác nhận (có thể trùng lặp)
+2 - Exactly once	Đảm bảo nhận đúng một lần (tốn tài nguyên hơn)
+
+- Ứng dụng
++ Hệ thống IoT thông minh: Cảm biến đo nhiệt độ, độ ẩm, ánh sáng...
++ Tự động hóa nhà máy: Theo dõi và điều khiển thiết bị từ xa.
++ Smart Home: Điều khiển đèn, cửa, điều hòa qua MQTT.
++ Giao tiếp giữa robot & máy chủ trong các hệ thống AI/ML.
