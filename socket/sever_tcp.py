@@ -36,7 +36,7 @@ tóm tắt luồng hoạt động
 - tạo socket server
 - gán địa chỉ ip và cổng (bind())
 - bật chết độ lắng nghe kết nối từ client (listen())
-- khi cos client kết nối, server chấp nhận kết nối (accept())
+- khi có client kết nối, server chấp nhận kết nối (accept())
 - nhận dữ liệu từ client (recv())
 - gửi phản hồi lại client (sendall())
 - đóng kết nối (close()), nhưng server vẫn tiếp tục chạy

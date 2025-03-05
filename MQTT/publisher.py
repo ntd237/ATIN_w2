@@ -6,7 +6,7 @@ broker = "localhost"
 topic  = "iot/temperature"
 
 client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-client.connect(broker, 1883, 60) # kết nối broker trên cổng 1883 với timeout là 60s60s
+client.connect(broker, 1883, 60) # kết nối broker trên cổng 1883 với timeout là 60s
 
 while True:
     temperature = random.uniform(20, 40) # giả lập nhiệt độ từ 20 - 40 độ C

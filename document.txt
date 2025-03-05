@@ -2,9 +2,9 @@ RESTful API
 - là 1 kiểu kiến trúc API dựa trên giao thức HTTP dùng để trao đổi dữ liệu giữa client và server, REST được thiết kế đơn giản, linh hoạt, dễ mở rộng
 
 - Đặc điểm chính:
-+ Client-Server (Máy khách - Máy chủ): Tách biệt giữa client (giao diện người dùng) và server (xử lý logic, dữ liệu).
++ Client-Server (Máy khách - Máy chủ): Tách biệt giữa client (giao diện người dùng) và server (xử lý logic, dữ liệu)
 + Stateless (Không trạng thái): Mỗi yêu cầu từ client đến server phải chứa đầy đủ thông tin cần thiết để xử lý, server không lưu trạng thái của client.
-+ Cacheable (Có thể lưu vào bộ nhớ đệm): Phản hồi từ server nên có thông tin về khả năng cache để cải thiện hiệu suất.
++ Cacheable (Có thể lưu vào bộ nhớ đệm): Phản hồi từ server nên có thông tin về khả năng cache để cải thiện hiệu suất
 + Uniform Interface (Giao diện đồng nhất): API phải tuân theo các chuẩn giao tiếp thống nhất (sử dụng các phương thức HTTP, định dạng dữ liệu JSON/XML).
 + Layered System (Hệ thống phân lớp): API có thể được thiết kế thành nhiều lớp để quản lý bảo mật, cân bằng tải,...
 

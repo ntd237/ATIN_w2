@@ -2,7 +2,7 @@
 
 import paho.mqtt.client as mqtt # thư viện Paho MQTT để nhận dữ liệu từ BrokerBroker
 import numpy as np
-from sklearn.linear_model import LinearRegression # mô hình hồi quy tuyến tính dự đoán nhiệt độđộ
+from sklearn.linear_model import LinearRegression # mô hình hồi quy tuyến tính dự đoán nhiệt độ
 
 # dữ liệu lịch sử nhiệt độ
 temperature_data = []

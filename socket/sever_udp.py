@@ -15,12 +15,12 @@ while True:
 
 '''
 tóm tắt luồng hoạt động
-- Tạo socket UDP.
-- Gán địa chỉ IP và cổng (bind()).
-- Server lắng nghe dữ liệu từ client (recvfrom()).
-- Khi nhận được dữ liệu, in ra màn hình.
-- Gửi phản hồi lại client (sendto()).
-- Server tiếp tục chạy, sẵn sàng nhận dữ liệu tiếp theo.
+- Tạo socket UDP
+- Gán địa chỉ IP và cổng (bind())
+- Server lắng nghe dữ liệu từ client (recvfrom())
+- Khi nhận được dữ liệu, in ra màn hình
+- Gửi phản hồi lại client (sendto())
+- Server tiếp tục chạy, sẵn sàng nhận dữ liệu tiếp theo
 '''
 
 
