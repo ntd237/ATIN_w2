@@ -45,5 +45,5 @@ def delete_user(user_id: int):
     users = [user for user in users if user["id"] != user_id]
     return {"message": "User deleted"}
 
-# cd d:/Workspace/Project/ATIN/2025/3/3/RESTful_API
+# cd d:/Workspace/Project/ATIN/2025/3/3/RESTful API
 # C:\Users\Lenovo\AppData\Roaming\Python\Python313\Scripts\uvicorn RESTful_API:app --reload
