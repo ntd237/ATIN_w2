@@ -1,32 +1,65 @@
 import socket
+import threading
 import time
 from config import SERVER_HOST, SERVER_PORT, HEARTBEAT_INTERVAL
 
-def start_client(): 
-    # kết nối  đến server và gửi heartbeat định kỳ
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect((SERVER_HOST, SERVER_PORT))
-    print("[+] connected to server")
+class Client:
+    def __init__(self, client_id, log_callback=None, message_callback=None):
+        self.client_id = client_id
+        self.client_socket = None
+        self.running = True
+        self.log_callback = log_callback
+        self.message_callback = message_callback
 
-    try:
-        while True:
-            time.sleep(HEARTBEAT_INTERVAL)
-            client.send("heartbeat".encode()) # gửi tín hiệu sống
-    except:
-        print("[-] connection lost")
-        client.close()
+    def log(self, message):
+        print(message)
+        if self.log_callback:
+            self.log_callback(message)
 
-if __name__ == "__main__":
-    start_client()
+    def connect(self):
+        while self.running:
+            try:
+                self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.client_socket.connect((SERVER_HOST, SERVER_PORT))
+                self.log(f"✅ Kết nối với server ({self.client_id})")
 
-"""
-tóm tắt luồng hoạt động:
-- client khởi động: 
-    tạo socket TCP
-    kết nối đến server
-    in ra thông báo kết nối thành công
-- gửi heartbeat định kỳ
-    mỗi HEARTBEAT_INTERVAL giây, client gửi heartbeat đến server để đảm bảo nó vẫn hoạt động
-- nếu mất kết nối
-    nếu server đóng kết nối hoặc mất kết nối, client in ra connection lost và đóng socket
-"""
+                threading.Thread(target=self.send_heartbeat, daemon=True).start()
+                threading.Thread(target=self.receive_messages, daemon=True).start()
+                break
+            except:
+                self.log("🔄 Đang thử kết nối lại...")
+                time.sleep(3)
+
+    def send_heartbeat(self):
+        while self.running:
+            try:
+                time.sleep(HEARTBEAT_INTERVAL)
+                self.client_socket.sendall(f"HEARTBEAT:{self.client_id}".encode())
+            except:
+                self.log("⚠️ Mất kết nối, thử kết nối lại...")
+                self.connect()
+
+    def receive_messages(self):
+        while self.running:
+            try:
+                message = self.client_socket.recv(1024).decode()
+                if message:
+                    self.log(message)
+                    if self.message_callback:
+                        self.message_callback(message)
+            except:
+                self.log(f"❌ Mất kết nối với server. Thử kết nối lại...")
+                self.connect()
+                break
+
+    def send_message(self, target_id, message):
+        try:
+            formatted_message = f"{target_id}:{message}"
+            self.client_socket.sendall(formatted_message.encode())
+            self.log(f"📤 Gửi đến {target_id}: {message}")
+        except:
+            self.log(f"❌ Lỗi gửi tin nhắn, kiểm tra kết nối!")
+
+    def close(self):
+        self.running = False
+        self.client_socket.close()

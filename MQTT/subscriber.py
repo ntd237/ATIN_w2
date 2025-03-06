@@ -85,8 +85,5 @@ tóm tắt luồng hoạt động
     nếu bị lỗi thì in ra lỗi xử lý dữ liệu
 - phân tích dữ liệu analyze_temperature()
     nếu chưa đủ dữ liệu thì in ra thông báo đang thu thập dữ liệu
-    dự đoán nhiệt độ tiếp theo
-    nếu nhiệt độ dự đoán quá cao thì in ra cảnh báo quá cao
-    nếu nhiệt độ dự đoán quá thấp thì in ra cảnh báo quá thấp
-    nếu nhiệt độ dự đoán ổn định thì in ra dự đoán ổn định
+    dự đoán nhiệt độ tiếp theo và in ra các cảnh báo tương ứng
 '''
