@@ -105,7 +105,7 @@ class ChatApp(QWidget):
             # Kiểm tra client nhận có hợp lệ không
             if receiver_id and receiver_id in self.clients:
                 self.clients[sender_id].send_message(receiver_id, message)
-                self.chat_log.append(f"{sender_id} → {receiver_id}: {message}")
+                # self.chat_log.append(f"{sender_id} → {receiver_id}: {message}")
             else:
                 self.chat_log.append(f"⚠️ Không thể gửi tin nhắn đến {receiver_id}!")
 
