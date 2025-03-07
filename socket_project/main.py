@@ -43,6 +43,7 @@ class ChatApp(QWidget):
         form_layout1 = QHBoxLayout()
         self.client_select1 = QComboBox()
         self.client_select1.addItem("Chọn Client gửi...")
+        self.client_select1.currentIndexChanged.connect(self.update_client_select2)
         form_layout1.addWidget(self.client_select1)
 
         self.message_input1 = QLineEdit()
@@ -88,27 +89,28 @@ class ChatApp(QWidget):
         self.client_select1.addItem(client_id)
         self.client_select2.addItem(client_id)
 
+    def update_client_select2(self):
+        selected_client = self.client_select1.currentText()
+        self.client_select2.clear()
+        self.client_select2.addItem("Chọn Client gửi...")
+        for client_id in self.clients.keys():
+            if client_id != selected_client:
+                self.client_select2.addItem(client_id)
+
     def send_message(self, client_select, message_input):
         sender_id = client_select.currentText()
         message = message_input.text()
         if sender_id and message:
-            # Lấy danh sách client hiện có, trừ sender
             receiver_ids = [client_id for client_id in self.clients.keys() if client_id != sender_id]
-
             if not receiver_ids:
                 self.chat_log.append("⚠️ Không có client nào để gửi!")
                 return
             
-            # Chọn client nhận tin nhắn từ combobox còn lại
             receiver_id = self.client_select2.currentText() if client_select == self.client_select1 else self.client_select1.currentText()
-
-            # Kiểm tra client nhận có hợp lệ không
             if receiver_id and receiver_id in self.clients:
                 self.clients[sender_id].send_message(receiver_id, message)
-                # self.chat_log.append(f"{sender_id} → {receiver_id}: {message}")
             else:
                 self.chat_log.append(f"⚠️ Không thể gửi tin nhắn đến {receiver_id}!")
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
